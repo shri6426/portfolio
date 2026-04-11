@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shri — Design Portfolio</title>
+  <meta name="description" content="Explore Shri's design portfolio — UI/UX projects, brand identities, and visual explorations.">
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══ DESIGN PAGE SPECIFIC ═══ */
+    .design-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #060608 0%, #0d0a18 50%, #060608 100%);
+    }
+    .design-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(255,218,0,.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 60%, rgba(224,64,251,.06) 0%, transparent 60%);
+    }
+    .design-hero-inner {
+      position: relative;
+      z-index: 10;
+      padding: 6rem 2rem 4rem;
+      animation: fadeSlideUp .8s ease .3s both;
+    }
+    .design-hero-inner h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.08;
+      margin-bottom: 1.5rem;
+    }
+    .design-hero-inner p {
+      font-family: 'Kalam', cursive;
+      font-size: 1.25rem;
+      color: rgba(255,255,255,.5);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .back-link {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 200;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .5rem 1.2rem;
+      border-radius: 100px;
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(20px);
+      font-family: 'Kalam', cursive;
+      font-size: .95rem;
+      color: rgba(255,255,255,.6);
+      text-decoration: none;
+      transition: all .25s ease;
+    }
+    .back-link:hover {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border-color: rgba(255,255,255,.25);
+    }
+
+    /* ═══ FILTER TABS ═══ */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      padding: 2rem 1rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(6,6,8,.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .filter-tab {
+      padding: .4rem 1.1rem;
+      border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,.1);
+      background: transparent;
+      color: rgba(255,255,255,.5);
+      font-family: 'Kalam', cursive;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .filter-tab:hover {
+      border-color: rgba(255,218,0,.4);
+      color: #ffda00;
+    }
+    .filter-tab.active {
+      background: rgba(255,218,0,.12);
+      border-color: #ffda00;
+      color: #ffda00;
+      box-shadow: 0 0 14px rgba(255,218,0,.15);
+    }
+
+    /* ═══ MASONRY GRID ═══ */
+    .design-gallery {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 2rem 6rem;
+      columns: 3;
+      column-gap: 1.4rem;
+    }
+    .design-card {
+      break-inside: avoid;
+      margin-bottom: 1.4rem;
+      border: 1.5px solid rgba(255,255,255,.07);
+      border-radius: 1.4rem;
+      overflow: hidden;
+      background: rgba(255,255,255,.02);
+      transition: all .35s cubic-bezier(.23,1,.32,1);
+      cursor: pointer;
+      position: relative;
+    }
+    .design-card:hover {
+      border-color: rgba(255,218,0,.3);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.4), 0 0 30px rgba(255,218,0,.06);
+    }
+
+    .design-visual {
+      position: relative;
+      overflow: hidden;
+    }
+    .design-visual img {
+      width: 100%;
+      display: block;
+      transition: transform .6s cubic-bezier(.23,1,.32,1);
+    }
+    .design-card:hover .design-visual img {
+      transform: scale(1.08);
+    }
+
+    /* ═══ PHOTO SECTION & FRAMES ═══ */
+    .photo-section {
+      max-width: 1200px;
+      margin: 8rem auto;
+      padding: 0 2rem;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 4rem;
+      margin-top: 4rem;
+    }
+    .photo-frame {
+      background: #1a1a1e;
+      padding: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+      transition: all .5s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+    }
+    .photo-frame:hover {
+      transform: translateY(-15px) scale(1.02) rotate(1deg);
+      border-color: rgba(255,218,0,0.2);
+    }
+    .photo-inner {
+      position: relative;
+      background: #000;
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+    .photo-inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: all .6s ease;
+      filter: contrast(1.05) brightness(0.9);
+    }
+    .photo-frame:hover img {
+      filter: contrast(1.1) brightness(1.1);
+      transform: scale(1.03);
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 900px) {
+      .design-gallery { columns: 2; padding: 2rem 1.5rem; }
+      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem; }
+      .design-hero-inner { padding: 6rem 1.5rem 3rem; }
+    }
+    @media (max-width: 768px) {
+      .back-link {
+        top: auto;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      }
+    }
+    @media (max-width: 600px) {
+      .design-gallery { columns: 1; padding: 1rem; }
+      .design-hero-inner { padding: 5rem 1.2rem 3rem; }
+      .design-hero-inner h1 { font-size: 2.5rem; }
+      .photo-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .photo-frame { padding: 0.8rem; }
+      .photo-inner { padding: 1.2rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="index.html" class="back-link">← Back to Home</a>
+
+  <!-- HERO -->
+  <section class="design-hero">
+    <div class="design-hero-inner">
+      <h1>My <span style="color:#ffda00">Design</span> Journey</h1>
+      <p>A visual documentation of UI/UX concepts, brand identities, and photographic explorations. Focus on the art, the structure, and the light.</p>
+    </div>
+  </section>
+
+  <!-- FILTER -->
+  <div class="filter-bar">
+    <button class="filter-tab active" data-filter="all">All Designs</button>
+    <button class="filter-tab" data-filter="uiux">UI/UX</button>
+    <button class="filter-tab" data-filter="brand">Branding</button>
+    <button class="filter-tab" data-filter="visual">Visual Art</button>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="design-gallery" id="design-gallery"></div>
+
+  <!-- PHOTO SECTION -->
+  <section class="photo-section">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <p class="sec-label">✦ framed moments</p>
+      <h2 class="sec-title" style="margin-bottom: 1rem;">Design Photography</h2>
+      <p style="color: rgba(255,255,255,0.4); font-family: 'Kalam', cursive;">Pure visual exploration through the lens.</p>
+    </div>
+    <div class="photo-grid" id="photo-grid"></div>
+  </section>
+
+  <footer>
+    <span>© 2025 Shri</span>
+    <span>Powered by <strong style="color:#e040fb">Mech Strek</strong> ⚡</span>
+  </footer>
+
+  <script>
+    const designs = [
+      // REAL ASSETS
+      { cat:'visual', img:'designs.photos/Messi.png' },
+      { cat:'visual', img:'designs.photos/mclaren.png' },
+      { cat:'visual', img:'designs.photos/vidra aala.png' },
+      { cat:'brand', img:'designs.photos/hanging banner.png' },
+      { cat:'visual', img:'designs.photos/The young devil.png' },
+      { cat:'visual', img:'designs.photos/Final.png' },
+      { cat:'brand', img:'designs.photos/1.png' },
+      { cat:'brand', img:'designs.photos/2.png' },
+      
+      // PHOTOS
+      { cat:'photo', img:'photos1/20241222_173241.jpg' },
+      { cat:'photo', img:'photos1/20241230_102527.jpg' },
+      { cat:'photo', img:'photos1/20250131_103643(0).jpg' },
+      { cat:'photo', img:'photos1/20250203_152946.jpg' },
+      { cat:'photo', img:'photos1/20250310_164525.jpg' },
+      { cat:'photo', img:'photos1/20250621_140649.jpg' },
+      { cat:'photo', img:'photos1/20250716_180729.jpg' },
+      { cat:'photo', img:'photos1/20250823_210534.jpg' },
+      { cat:'photo', img:'photos1/20250823_210929.jpg' },
+      { cat:'photo', img:'photos1/20251006_162148.jpg' },
+      { cat:'photo', img:'photos1/20251015_185404.jpg' },
+      { cat:'photo', img:'photos1/20251018_203905.jpg' },
+      { cat:'photo', img:'photos1/20251217_173001.jpg' },
+      { cat:'photo', img:'photos1/20260307_213810(1).jpg' },
+      { cat:'photo', img:'photos1/20260308_090333.jpg' },
+      { cat:'photo', img:'photos1/20260322_193114.jpg' },
+      { cat:'photo', img:'photos1/IMG_1896.JPG' },
+      { cat:'photo', img:'photos1/retouch_2025031521580637.jpg' },
+    ];
+
+    const gallery = document.getElementById('design-gallery');
+    const photoGrid = document.getElementById('photo-grid');
+
+    function renderDesigns(filter) {
+      gallery.innerHTML = '';
+      const nonPhotos = designs.filter(d => d.cat !== 'photo');
+      const filtered = filter === 'all' ? nonPhotos : nonPhotos.filter(d => d.cat === filter);
+      
+      filtered.forEach((d, i) => {
+        const card = document.createElement('div');
+        card.className = 'design-card';
+        card.style.animation = `fadeSlideUp .6s ease ${i * 0.08}s both`;
+        
+        card.innerHTML = `
+          <div class="design-visual">
+            <img src="${d.img}" loading="lazy">
+          </div>`;
+        gallery.appendChild(card);
+      });
+    }
+
+    function renderPhotos() {
+        photoGrid.innerHTML = '';
+        const photos = designs.filter(d => d.cat === 'photo');
+        photos.forEach((p, i) => {
+            const frame = document.createElement('div');
+            frame.className = 'photo-frame';
+            frame.style.animation = `fadeSlideUp .8s ease ${i * 0.12}s both`;
+            
+            frame.innerHTML = `
+                <div class="photo-inner">
+                    <img src="${p.img}" loading="lazy">
+                </div>
+            `;
+            photoGrid.appendChild(frame);
+        });
+    }
+
+    renderDesigns('all');
+    renderPhotos();
+
+    // Filter tabs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderDesigns(tab.dataset.filter);
+      });
+    });
+
+    // Interaction effects
+    gallery.addEventListener('mousemove', e => {
+      const card = e.target.closest('.design-card');
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      card.style.transform = `translateY(-6px) perspective(600px) rotateX(${(y-.5)*-6}deg) rotateY(${(x-.5)*6}deg)`;
+    });
+    gallery.addEventListener('mouseleave', e => {
+      const card = e.target.closest('.design-card');
+      if (card) card.style.transform = '';
+    }, true);
+  </script>
+</body>
+</html>

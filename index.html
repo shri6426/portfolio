@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shri — Designer & Visual Creator</title>
+  <meta name="description"
+    content="Shri is a designer, photographer, and creative developer crafting pixel-perfect digital experiences and compelling visual identities.">
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Syne:wght@500;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Particle trail canvas (follows cursor everywhere) -->
+  <canvas id="trail-canvas"></canvas>
+
+  <div id="dot"></div>
+  <div id="ring"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="designs.html" class="nav-designs">Designs</a>
+    <a href="#playground">Play</a>
+    <a href="#photography">Photos</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section id="hero">
+    <canvas id="cv"></canvas>
+    <div class="sparks" id="sparks"></div>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow">— designer · photographer · developer —</p>
+      <h1 class="hero-name">
+        Hii, I am<br>
+        <span
+          style="background:linear-gradient(100deg,#fff 30%,rgba(255,255,255,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Shri.</span>
+      </h1>
+      <p class="hero-sub">
+        <span id="typed-text">Designer Who Thinks in Pixels</span>
+        <svg viewBox="0 0 300 12" fill="none">
+          <path d="M2 8 C50 2,100 11,150 6 C200 1,250 10,298 7" stroke="#ffda00" stroke-width="2.5"
+            stroke-linecap="round" />
+        </svg>
+      </p>
+      <div class="hero-btns">
+        <a href="#work" class="btn btn-w">See my work ↓</a>
+        <a href="#contact" class="btn btn-o">Let's chat</a>
+      </div>
+    </div>
+
+    <!-- hand-drawn doodle character -->
+    <svg class="doodle-char" viewBox="0 0 260 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="130" cy="295" rx="55" ry="75" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M80 272 C56 252 46 222 60 194" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M180 264 C205 234 224 204 210 175 C200 160 185 165 190 180" stroke="white" stroke-width="3"
+        stroke-linecap="round" />
+      <path d="M210 175 C215 163 223 160 225 165" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M208 172 C210 159 217 154 220 159" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M205 170 C203 157 208 150 213 153" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+      <circle cx="130" cy="152" r="66" stroke="white" stroke-width="3" />
+      <path d="M76 133 C66 93 80 63 104 58 C84 48 70 28 84 14" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M86 118 C71 83 80 48 100 43 C80 33 74 8 94 0" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M105 108 C90 73 95 43 112 38" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M130 103 C120 68 124 38 138 33" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M155 108 C160 73 156 43 146 35" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M174 120 C186 83 179 52 165 42" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M186 136 C202 102 195 72 181 62" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <rect x="93" y="140" width="36" height="24" rx="7" fill="white" opacity=".12" stroke="white" stroke-width="2.5" />
+      <rect x="135" y="140" width="36" height="24" rx="7" fill="white" opacity=".12" stroke="white"
+        stroke-width="2.5" />
+      <path d="M129 153 L135 153" stroke="white" stroke-width="2.2" stroke-linecap="round" />
+      <path d="M91 153 L87 150" stroke="white" stroke-width="2.2" stroke-linecap="round" />
+      <path d="M173 153 L177 150" stroke="white" stroke-width="2.2" stroke-linecap="round" />
+      <path d="M112 183 C121 194 141 194 150 183" stroke="white" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M108 368 L98 374" stroke="white" stroke-width="3" stroke-linecap="round" />
+      <path d="M152 368 L162 374" stroke="white" stroke-width="3" stroke-linecap="round" />
+    </svg>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <div class="dv"></div>
+
+  <!-- ══ STATS BAR ══ -->
+  <section id="stats" style="background:#0a0a14">
+    <div class="wrap" style="padding:3rem 4rem">
+      <div class="stats-bar reveal">
+        <div class="stat-item">
+          <div class="stat-number" data-count="10">0+</div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="5">0+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="1000">0+</div>
+          <div class="stat-label">Photos Taken</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="3">0+</div>
+          <div class="stat-label">Years Creating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dv"></div>
+
+  <!-- ══ ABOUT ══ -->
+  <section id="about">
+    <div class="blob"
+      style="width:560px;height:560px;top:-80px;right:-100px;background:radial-gradient(circle,rgba(224,64,251,.09),transparent 70%)">
+    </div>
+    <div class="wrap">
+      <div class="about-grid">
+
+        <div class="orb-col reveal">
+          <div class="orb">
+            <div class="orb-ring"></div>
+            <div class="orb-inner">
+              <svg width="108" height="108" viewBox="0 0 110 110" fill="none">
+                <circle cx="55" cy="60" r="35" stroke="white" stroke-width="2.3" />
+                <path d="M36 44 C32 30 38 20 46 22" stroke="white" stroke-width="2" stroke-linecap="round" />
+                <path d="M43 40 C40 26 46 16 54 18" stroke="white" stroke-width="2" stroke-linecap="round" />
+                <path d="M54 38 C54 24 60 16 66 20" stroke="white" stroke-width="2" stroke-linecap="round" />
+                <path d="M65 42 C68 28 72 22 76 26" stroke="white" stroke-width="2" stroke-linecap="round" />
+                <circle cx="44" cy="57" r="3.8" fill="white" />
+                <circle cx="66" cy="57" r="3.8" fill="white" />
+                <circle cx="45.5" cy="56" r="1.4" fill="#060608" />
+                <circle cx="67.5" cy="56" r="1.4" fill="#060608" />
+                <path d="M44 74 C50 81 62 81 68 74" stroke="white" stroke-width="2.2" stroke-linecap="round" />
+                <rect x="12" y="76" width="20" height="14" rx="3" stroke="white" stroke-width="1.7" fill="none" />
+                <circle cx="22" cy="83" r="4" stroke="white" stroke-width="1.5" fill="none" />
+                <rect x="25" y="73" width="5" height="4" rx="1" stroke="white" stroke-width="1.4" fill="none" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="tag-row">
+            <span class="atag" style="--tc:#ffda00;--bg:rgba(255,218,0,.1)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+              </svg>
+              Designer
+            </span>
+            <span class="atag" style="--tc:#00e5ff;--bg:rgba(0,229,255,.08)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+              Developer
+            </span>
+            <span class="atag" style="--tc:#b2ff59;--bg:rgba(178,255,89,.08)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                <circle cx="12" cy="13" r="4" />
+              </svg>
+              Photographer
+            </span>
+            <span class="atag" style="--tc:#ff6a1a;--bg:rgba(255,106,26,.08)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                <line x1="6" y1="1" x2="6" y2="4" />
+                <line x1="10" y1="1" x2="10" y2="4" />
+                <line x1="14" y1="1" x2="14" y2="4" />
+              </svg>
+              Boxer
+            </span>
+          </div>
+        </div>
+
+        <div class="about-text reveal">
+          <p class="sec-label">✦ who am i?</p>
+          <h2 class="sec-title">Designing with<br><span style="color:#e040fb">intention</span></h2>
+          <p>I'm a <strong style="color:#ffda00">designer</strong> at heart — driven by visual storytelling, pixel-perfect craft, and the pursuit of creating digital experiences that feel alive. From brand identities to full UI/UX flows, I design with empathy and obsessive attention to detail.</p>
+          <p>As a photographer, I capture moments that tell stories. As a developer, I bring my own designs to life — writing every line of code from scratch. This rare blend of design thinking + technical execution is what sets my work apart.</p>
+          <p>I'm constantly leveling up — learning new tools, exploring emerging design trends, and pushing creative boundaries. I also train in boxing, which has built the discipline, focus, and resilience that fuels everything I create.</p>
+          <p
+            style="font-family:'Kalam',cursive;font-size:1rem;color:rgba(255,255,255,.35);font-style:italic;margin-top:.5rem">
+            Design isn't just what I do — it's how I think.</p>
+          <div class="chips" style="margin-top:1.8rem">
+            <span class="chip">Figma</span>
+            <span class="chip">UI/UX Design</span>
+            <span class="chip">Brand Identity</span>
+            <span class="chip">Photography</span>
+            <span class="chip">React</span>
+            <span class="chip">Three.js</span>
+            <span class="chip">GSAP</span>
+            <span class="chip">WebGL</span>
+            <span class="chip">Blender</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="dv"></div>
+
+  <!-- ══ WORK ══ -->
+  <section id="work" style="background:#0d0d14">
+    <div class="blob"
+      style="width:480px;height:480px;bottom:-50px;left:-70px;background:radial-gradient(circle,rgba(255,218,0,.06),transparent 70%)">
+    </div>
+    <div class="wrap">
+      <div class="reveal">
+        <p class="sec-label">✦ selected work</p>
+        <h2 class="sec-title">Things I've been <span style="color:#ffda00">cookin'</span>
+          <svg style="display:inline-block;vertical-align:middle;margin-left:.3rem" width="36" height="36"
+            viewBox="0 0 44 44" fill="none">
+            <ellipse cx="20" cy="30" rx="13" ry="8" stroke="#ffda00" stroke-width="2.2" />
+            <path d="M33 30 L41 26" stroke="#ffda00" stroke-width="2.2" stroke-linecap="round" />
+            <path d="M16 22 C16 15 24 15 24 22" stroke="#ffda00" stroke-width="2" stroke-linecap="round" fill="none" />
+          </svg>
+        </h2>
+      </div>
+
+      <div class="work-grid">
+
+        <!-- Boxing Gym -->
+        <div class="wcard reveal">
+          <div class="wvis">
+            <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="bg1" cx="30%" cy="35%" r="80%">
+                  <stop offset="0%" stop-color="#ff6a1a" stop-opacity=".3" />
+                  <stop offset="100%" stop-color="#ffda00" stop-opacity=".1" />
+                </radialGradient>
+              </defs>
+              <rect width="600" height="220" fill="url(#bg1)" />
+              <circle cx="80" cy="80" r="22" fill="#ff6a1a" opacity=".08" />
+              <circle cx="200" cy="150" r="38" fill="#ff6a1a" opacity=".07" />
+              <circle cx="360" cy="60" r="50" fill="#ffda00" opacity=".06" />
+              <circle cx="500" cy="150" r="30" fill="#ff6a1a" opacity=".07" />
+              <path
+                d="M270 148 C254 137 247 121 254 105 C259 92 271 89 280 94 C278 82 285 74 294 76 C301 78 303 87 301 95 C309 87 319 87 321 97 C323 107 317 115 311 117 L311 148 Z"
+                stroke="rgba(255,255,255,.4)" stroke-width="2.2" fill="rgba(255,255,255,.05)" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M270 148 L311 148 C315 158 315 167 311 171 C301 177 277 177 269 171 C265 167 265 158 270 148Z"
+                stroke="rgba(255,255,255,.4)" stroke-width="2.2" fill="rgba(255,255,255,.05)" stroke-linejoin="round" />
+              <line x1="269" y1="148" x2="313" y2="148" stroke="rgba(255,255,255,.22)" stroke-width="1.5" />
+              <text x="300" y="205" text-anchor="middle" font-family="Syne,sans-serif" font-size="11" font-weight="700"
+                fill="rgba(255,255,255,.28)" letter-spacing="4">BOXING GYM</text>
+            </svg>
+          </div>
+          <div class="wbody">
+            <div class="wtag" style="color:#ff6a1a">✦ Web Design &amp; Dev</div>
+            <div class="wtitle">Boxing Gym Website</div>
+            <div class="wdesc">A bold, high-energy website for a boxing gym — class schedules, trainer profiles,
+              membership sign-up, and a contact form. Built from scratch.</div>
+            <a href="https://resilient-snickerdoodle-59b955.netlify.app/" target="_blank" rel="noopener" class="warr"
+              style="text-decoration:none">View project <span>→</span></a>
+          </div>
+        </div>
+
+        <!-- E-Commerce -->
+        <div class="wcard reveal" style="transition-delay:.1s">
+          <div class="wvis">
+            <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="bg2" cx="30%" cy="35%" r="80%">
+                  <stop offset="0%" stop-color="#7c5cfc" stop-opacity=".3" />
+                  <stop offset="100%" stop-color="#e040fb" stop-opacity=".1" />
+                </radialGradient>
+              </defs>
+              <rect width="600" height="220" fill="url(#bg2)" />
+              <circle cx="90" cy="90" r="25" fill="#7c5cfc" opacity=".08" />
+              <circle cx="210" cy="155" r="40" fill="#e040fb" opacity=".07" />
+              <circle cx="370" cy="55" r="48" fill="#7c5cfc" opacity=".06" />
+              <circle cx="500" cy="140" r="28" fill="#e040fb" opacity=".07" />
+              <rect x="258" y="108" width="72" height="66" rx="5" stroke="rgba(255,255,255,.4)" stroke-width="2.2"
+                fill="rgba(255,255,255,.05)" />
+              <path d="M274 108 C274 90 314 90 314 108" stroke="rgba(255,255,255,.4)" stroke-width="2.2" fill="none"
+                stroke-linecap="round" />
+              <line x1="258" y1="128" x2="330" y2="128" stroke="rgba(255,255,255,.22)" stroke-width="1.5" />
+              <circle cx="280" cy="106" r="3.5" fill="rgba(255,255,255,.35)" />
+              <circle cx="308" cy="106" r="3.5" fill="rgba(255,255,255,.35)" />
+              <text x="300" y="205" text-anchor="middle" font-family="Syne,sans-serif" font-size="11" font-weight="700"
+                fill="rgba(255,255,255,.28)" letter-spacing="4">E-COMMERCE</text>
+            </svg>
+          </div>
+          <div class="wbody">
+            <div class="wtag" style="color:#7c5cfc">✦ Web Design &amp; Dev</div>
+            <div class="wtitle">E-Commerce Store</div>
+            <div class="wdesc">A clean, conversion-focused online store — product listings, cart, smooth checkout flow,
+              and a fully responsive mobile-first design.</div>
+            <div class="warr">View project <span>→</span></div>
+          </div>
+        </div>
+
+        <!-- Portfolio Website -->
+        <div class="wcard reveal" style="transition-delay:.2s">
+          <div class="wvis">
+            <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="bg3" cx="30%" cy="35%" r="80%">
+                  <stop offset="0%" stop-color="#00e5ff" stop-opacity=".3" />
+                  <stop offset="100%" stop-color="#7c5cfc" stop-opacity=".1" />
+                </radialGradient>
+              </defs>
+              <rect width="600" height="220" fill="url(#bg3)" />
+              <circle cx="100" cy="70" r="28" fill="#00e5ff" opacity=".08" />
+              <circle cx="220" cy="160" r="42" fill="#7c5cfc" opacity=".07" />
+              <circle cx="380" cy="50" r="45" fill="#00e5ff" opacity=".06" />
+              <circle cx="510" cy="145" r="32" fill="#7c5cfc" opacity=".07" />
+              <circle cx="290" cy="95" r="22" stroke="rgba(255,255,255,.4)" stroke-width="2.2"
+                fill="rgba(255,255,255,.05)" />
+              <path d="M265 148 C265 125 315 125 315 148" stroke="rgba(255,255,255,.4)" stroke-width="2.2"
+                fill="rgba(255,255,255,.05)" stroke-linecap="round" />
+              <line x1="265" y1="148" x2="315" y2="148" stroke="rgba(255,255,255,.22)" stroke-width="1.5" />
+              <line x1="275" y1="160" x2="305" y2="160" stroke="rgba(255,255,255,.18)" stroke-width="1.5"
+                stroke-linecap="round" />
+              <line x1="280" y1="168" x2="300" y2="168" stroke="rgba(255,255,255,.18)" stroke-width="1.5"
+                stroke-linecap="round" />
+              <text x="300" y="205" text-anchor="middle" font-family="Syne,sans-serif" font-size="11" font-weight="700"
+                fill="rgba(255,255,255,.28)" letter-spacing="4">PORTFOLIO</text>
+            </svg>
+          </div>
+          <div class="wbody">
+            <div class="wtag" style="color:#00e5ff">✦ Web Design &amp; Dev</div>
+            <div class="wtitle">Portfolio — Vignesh Ramakrishnan</div>
+            <div class="wdesc">A sleek, professional portfolio for a Technical Account Manager — experience timeline,
+              skills showcase, awards section, and contact flow. Designed & built from scratch.</div>
+            <a href="https://vignesh-ramakrishnan-portfolio123.vercel.app/" target="_blank" rel="noopener" class="warr"
+              style="text-decoration:none">View project <span>→</span></a>
+          </div>
+        </div>
+
+        <!-- Lubna Shireen Portfolio -->
+        <div class="wcard reveal" style="transition-delay:.3s">
+          <div class="wvis">
+            <svg viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="bg4" cx="30%" cy="35%" r="80%">
+                  <stop offset="0%" stop-color="#e040fb" stop-opacity=".3" />
+                  <stop offset="100%" stop-color="#7c5cfc" stop-opacity=".1" />
+                </radialGradient>
+              </defs>
+              <rect width="600" height="220" fill="url(#bg4)" />
+              <circle cx="110" cy="80" r="30" fill="#e040fb" opacity=".08" />
+              <circle cx="230" cy="170" r="45" fill="#7c5cfc" opacity=".07" />
+              <circle cx="390" cy="65" r="50" fill="#e040fb" opacity=".06" />
+              <circle cx="520" cy="130" r="35" fill="#7c5cfc" opacity=".07" />
+              <text x="300" y="110" text-anchor="middle" font-family="Syne,sans-serif" font-size="24" font-weight="800" fill="rgba(255,255,255,.15)" letter-spacing="2">LUBNA SHIREEN</text>
+              <text x="300" y="205" text-anchor="middle" font-family="Syne,sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,.28)" letter-spacing="4">PORTFOLIO</text>
+            </svg>
+          </div>
+          <div class="wbody">
+            <div class="wtag" style="color:#e040fb">✦ Web Design &amp; Dev</div>
+            <div class="wtitle">Portfolio — Lubna Shireen</div>
+            <div class="wdesc">A sophisticated, minimal portfolio website built for Lubna Shireen — featuring clean layouts, smooth transitions, and an elegant dark aesthetic.</div>
+            <a href="https://lubna-shireen-porfolio.vercel.app/" target="_blank" rel="noopener" class="warr" style="text-decoration:none">View project <span>→</span></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="dv"></div>
+
+  <!-- ══ STICKMAN PLAYGROUND ══ -->
+  <section id="playground" class="playground-section">
+    <div class="blob"
+      style="width:500px;height:500px;top:50%;left:30%;transform:translateY(-50%);background:radial-gradient(circle,rgba(224,64,251,.06),transparent 70%)">
+    </div>
+    <div class="blob"
+      style="width:400px;height:400px;top:30%;right:10%;background:radial-gradient(circle,rgba(0,229,255,.05),transparent 70%)">
+    </div>
+    <div class="wrap">
+      <div class="reveal">
+        <p class="sec-label">✦ interactive zone</p>
+        <h2 class="sec-title">Play with <span style="color:#e040fb">stickmen</span>
+          <svg style="display:inline-block;vertical-align:middle;margin-left:.4rem" width="38" height="38"
+            viewBox="0 0 44 44" fill="none">
+            <circle cx="22" cy="11" r="7" stroke="#e040fb" stroke-width="2.2" />
+            <line x1="22" y1="18" x2="22" y2="32" stroke="#e040fb" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="14" y1="24" x2="30" y2="24" stroke="#e040fb" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="22" y1="32" x2="16" y2="42" stroke="#e040fb" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="22" y1="32" x2="28" y2="42" stroke="#e040fb" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+        </h2>
+      </div>
+
+      <div class="stickman-canvas-wrap reveal">
+        <canvas id="stickman-playground" class="stickman-canvas"></canvas>
+        <div class="playground-controls reveal">
+          <button class="pg-btn" id="btn-spawn" title="Add stickman">➕ Spawn</button>
+          <button class="pg-btn" id="btn-dance" title="Make everyone dance">💃 Dance Party</button>
+          <button class="pg-btn" id="btn-wave" title="Group wave">👋 Wave</button>
+          <button class="pg-btn" id="btn-fight" title="Stickman fight!">🥊 Fight!</button>
+          <button class="pg-btn" id="btn-reset" title="Reset playground">🔄 Reset</button>
+        </div>
+        <div class="playground-hint">
+          ✨ Hover to scare them • Click to make them jump • Use buttons to trigger group actions • Double-click for fireworks!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dv"></div>
+
+  <!-- ══ PROJECTS ══ -->
+  <section id="projects">
+    <div class="blob"
+      style="width:420px;height:420px;top:0;right:-60px;background:radial-gradient(circle,rgba(0,229,255,.06),transparent 70%)">
+    </div>
+    <div class="wrap">
+      <div class="reveal">
+        <p class="sec-label">✦ side quests</p>
+        <h2 class="sec-title">Random stuff I <span style="color:#00e5ff">built</span>
+          <svg style="display:inline-block;vertical-align:middle;margin-left:.3rem" width="34" height="34"
+            viewBox="0 0 40 40" fill="none">
+            <path d="M28 7 C32 9 34 14 31 18 L13 33 C11 35 8 35 6 33 C4 31 4 28 6 26 L25 9 C27 6 26 4 28 7Z"
+              stroke="#00e5ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="9" cy="30" r="2.4" stroke="#00e5ff" stroke-width="2" />
+          </svg>
+        </h2>
+      </div>
+      <div class="proj-grid" id="pgrid"></div>
+    </div>
+  </section>
+
+  <div class="dv"></div>
+
+  <!-- ══ PHOTOGRAPHY ══ -->
+  <section id="photography" style="background:#0d0d14">
+    <div class="blob"
+      style="width:460px;height:460px;top:50%;left:40%;transform:translateY(-50%);background:radial-gradient(circle,rgba(178,255,89,.05),transparent 70%)">
+    </div>
+    <div class="wrap" style="padding-bottom:4rem">
+      <div class="reveal">
+        <p class="sec-label">✦ through the lens</p>
+        <h2 class="sec-title">Moments I <span style="color:#b2ff59">captured</span>
+          <svg style="display:inline-block;vertical-align:middle;margin-left:.3rem" width="38" height="38"
+            viewBox="0 0 44 44" fill="none">
+            <rect x="4" y="12" width="36" height="26" rx="4" stroke="#b2ff59" stroke-width="2.2" />
+            <circle cx="22" cy="25" r="7.5" stroke="#b2ff59" stroke-width="2.2" />
+            <circle cx="22" cy="25" r="3.2" stroke="#b2ff59" stroke-width="1.8" />
+            <path d="M12 12 L15 6 L29 6 L32 12" stroke="#b2ff59" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <rect x="33" y="16" width="4" height="3" rx="1" stroke="#b2ff59" stroke-width="1.5" />
+          </svg>
+        </h2>
+      </div>
+      <div class="photo-scroll-wrap">
+        <div class="photo-track" id="photo-track"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="dv"></div>
+
+  <!-- ══ DESIGN SHOWCASE CTA ══ -->
+  <section id="design-cta" class="design-cta-section">
+    <div class="blob"
+      style="width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,218,0,.08),transparent 70%)">
+    </div>
+    <div class="wrap" style="text-align:center">
+      <div class="reveal">
+        <p class="sec-label">✦ design portfolio</p>
+        <h2 class="sec-title">See my <span style="color:#ffda00">designs</span>
+          <svg style="display:inline-block;vertical-align:middle;margin-left:.3rem" width="38" height="38"
+            viewBox="0 0 44 44" fill="none">
+            <rect x="6" y="6" width="32" height="32" rx="4" stroke="#ffda00" stroke-width="2.2" />
+            <circle cx="17" cy="17" r="4" stroke="#ffda00" stroke-width="2" />
+            <path d="M6 30 L15 22 L22 28 L30 18 L38 26" stroke="#ffda00" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </h2>
+        <p style="font-family:'Kalam',cursive;font-size:1.15rem;color:rgba(255,255,255,.45);max-width:540px;margin:0 auto 2.5rem;line-height:1.7">Explore my design portfolio — UI/UX projects, brand identities, visual explorations, and design photography. Every pixel crafted with purpose.</p>
+        <a href="designs.html" class="btn btn-designs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" style="vertical-align:middle;margin-right:.4rem">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+          </svg>
+          View Design Portfolio →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="dv"></div>
+
+  <!-- ══ CONTACT ══ -->
+  <section id="contact">
+    <div class="blob"
+      style="width:660px;height:660px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(224,64,251,.1),transparent 70%)">
+    </div>
+    <div class="wrap">
+      <div class="c-inner reveal">
+        <h2 class="c-title">Let's build<br>something <span style="color:#e040fb">wild</span>
+          <svg style="display:inline-block;vertical-align:middle;margin-left:.4rem" width="46" height="46"
+            viewBox="0 0 52 52" fill="none">
+            <path d="M26 6 C32 6 40 12 40 25 L36 35 L26 39 L16 35 L12 25 C12 12 20 6 26 6Z" stroke="#e040fb"
+              stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="26" cy="22" r="4" stroke="#e040fb" stroke-width="2" />
+            <path d="M16 35 L10 43" stroke="#e040fb" stroke-width="2" stroke-linecap="round" />
+            <path d="M36 35 L42 43" stroke="#e040fb" stroke-width="2" stroke-linecap="round" />
+            <path d="M20 39 L22 45 L26 43 L30 45 L32 39" stroke="#e040fb" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </h2>
+        <p class="c-sub">Got a project, a collab, or just wanna say hi?</p>
+
+        <div class="scards">
+          <a href="mailto:shriram6426@gmail.com" class="scard s-em reveal">
+            <div class="sico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="3" />
+                <path d="M2 7l10 7 10-7" />
+              </svg>
+            </div>
+            <div class="slabel">Email me</div>
+            <div class="shandle">shriram6426@gmail.com</div>
+            <div class="sarr">↗</div>
+            <svg class="ssquig" viewBox="0 0 70 14" fill="none">
+              <path d="M2 8 C14 2,28 13,42 7 C56 1,64 11,68 8" stroke="#e040fb" stroke-width="1.8"
+                stroke-linecap="round" opacity=".32" />
+            </svg>
+          </a>
+
+          <a href="https://instagram.com/_.shrx.___" target="_blank" rel="noopener" class="scard s-ig reveal"
+            style="transition-delay:.1s">
+            <div class="sico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </div>
+            <div class="slabel">Instagram</div>
+            <div class="shandle">_.shrx.___</div>
+            <div class="sarr">↗</div>
+            <svg class="ssquig" viewBox="0 0 70 14" fill="none">
+              <path d="M2 10 C18 2,36 14,52 6 C60 2,66 10,68 8" stroke="#ff6a1a" stroke-width="1.8"
+                stroke-linecap="round" opacity=".32" />
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/shri-ram-3b4561288/" target="_blank" rel="noopener" class="scard reveal" style="transition-delay:.2s; border-color: rgba(0, 119, 181, 0.25);">
+            <div class="sico" style="border-color: rgba(0, 119, 181, 0.3); color: #0077b5;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </div>
+            <div class="slabel">LinkedIn</div>
+            <div class="shandle">shri-ram</div>
+            <div class="sarr">↗</div>
+            <svg class="ssquig" viewBox="0 0 70 14" fill="none">
+              <path d="M2 6 C12 12,24 2,36 8 C48 14,60 4,68 10" stroke="#0077b5" stroke-width="1.8" stroke-linecap="round" opacity=".32" />
+            </svg>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/shri6426" target="_blank" rel="noopener" class="scard reveal" style="transition-delay:.3s; border-color: rgba(255, 255, 255, 0.2);">
+            <div class="sico" style="border-color: rgba(255, 255, 255, 0.3);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+            </div>
+            <div class="slabel">GitHub</div>
+            <div class="shandle">shri6426</div>
+            <div class="sarr">↗</div>
+            <svg class="ssquig" viewBox="0 0 70 14" fill="none">
+              <path d="M2 10 C20 4,40 16,60 8" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity=".32" />
+            </svg>
+          </a>
+        </div>
+
+        <svg viewBox="0 0 600 20" width="100%" style="margin-top:3.5rem;opacity:.12" fill="none">
+          <path d="M0 10 C60 3,120 17,180 10 C240 3,300 17,360 10 C420 3,480 17,540 10 C560 7,580 13,600 10"
+            stroke="white" stroke-width="1.4" stroke-linecap="round" />
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Shri</span>
+    <span>Powered by <strong style="color:#e040fb">Mech Strek</strong> ⚡</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
