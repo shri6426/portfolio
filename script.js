@@ -863,9 +863,6 @@ photos.forEach((p, i) => {
   if (p.img) {
     item.innerHTML = `
       <img src="${p.img}" alt="${p.l}" style="height:${p.h}px; object-fit: cover;">
-      <div style="position:absolute; bottom:12px; left:0; width:100%; text-align:center; z-index:5;">
-        <span style="font-family:'Kalam', cursive; font-size:13px; color:rgba(255,255,255,0.8); background:rgba(0,0,0,0.4); padding:2px 10px; border-radius:100px; backdrop-filter:blur(4px);">${p.l}</span>
-      </div>
     `;
   } else {
     item.innerHTML = `<svg viewBox="0 0 300 ${p.h}" xmlns="http://www.w3.org/2000/svg" style="height:${p.h}px">
