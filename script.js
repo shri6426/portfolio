@@ -824,7 +824,7 @@ projs.forEach((p, idx) => {
   const c = document.createElement('div');
   c.className = 'pcard reveal';
   c.style.transitionDelay = `${idx * 0.08}s`;
-  c.innerHTML = `<div class="pico">${p.ico}</div><div class="ptitle">${p.t}</div><div class="pdesc">${p.d}</div><div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div><a href="#" class="plnk">View project ↗</a>`;
+  c.innerHTML = `<div class="pico">${p.ico}</div><div class="ptitle">${p.t}</div><div class="pdesc">${p.d}</div><div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>`;
   c.addEventListener('mousemove', e => {
     const r = c.getBoundingClientRect();
     c.style.transform = `translateY(-5px) rotateX(${((e.clientY - r.top) / r.height - .5) * -8}deg) rotateY(${((e.clientX - r.left) / r.width - .5) * 8}deg)`;
