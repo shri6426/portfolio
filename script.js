@@ -864,6 +864,22 @@ const allPhotos = [
   { img: 'photos1/20260322_193114.jpg', l: 'Deep Blue', h: 420 },
   { img: 'photos1/IMG_1896.JPG', l: 'Captured Life', h: 390 },
   { img: 'photos1/retouch_2025031521580637.jpg', l: 'Abstract Edit', h: 400 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.13 PM (1).jpeg', l: 'Visual Pulse', h: 380 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.13 PM.jpeg', l: 'Urban Texture', h: 420 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.14 PM.jpeg', l: 'Daily Rhythm', h: 360 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (1).jpeg', l: 'Storytelling', h: 400 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (2).jpeg', l: 'Aesthetic Focus', h: 380 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (3).jpeg', l: 'Lens Flare', h: 440 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM.jpeg', l: 'Monochrome', h: 350 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.16 PM (1).jpeg', l: 'City Lights', h: 410 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.16 PM.jpeg', l: 'Pixel Perfect', h: 380 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM (1).jpeg', l: 'Shadow Play', h: 390 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM (2).jpeg', l: 'Fine Grain', h: 370 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM.jpeg', l: 'Discovery', h: 430 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM (1).jpeg', l: 'Candid Motion', h: 400 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM (2).jpeg', l: 'Neon Glow', h: 360 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM.jpeg', l: 'Drift', h: 380 },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.19 PM.jpeg', l: 'Quiet Echo', h: 420 },
 ];
 
 function populateTrack(trackId, photoList) {
