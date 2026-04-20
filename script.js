@@ -845,56 +845,47 @@ projs.forEach((p, idx) => {
 /* ═══════════════════════════════════════════════════
    PHOTOS - horizontal drag-to-scroll gallery
    ═══════════════════════════════════════════════════ */
-const photos = [
-  { img: 'photos1/20260308_090333.jpg', l: 'Misty Mornings', h: 420 },
-  { img: 'photos1/20250621_140649.jpg', l: 'Summer Solstice', h: 400 },
+const allPhotos = [
   { img: 'photos1/20241222_173241.jpg', l: 'Golden Hour', h: 380 },
-  { img: 'photos1/20251217_173001.jpg', l: 'Dusk Horizons', h: 400 },
-  { img: 'photos1/IMG_1896.JPG', l: 'Candid Moments', h: 360 },
-  { img: 'photos1/20250823_210929.jpg', l: 'Midnight Trails', h: 380 },
-  { img: 'photos1/20250716_180729.jpg', l: 'Rainy Day Refl', h: 340 },
-  { img: 'photos1/20250310_164525.jpg', l: 'Serene Nature', h: 400 },
+  { img: 'photos1/20241230_102527.jpg', l: 'Urban Escape', h: 420 },
+  { img: 'photos1/20250131_103643(0).jpg', l: 'Minimal View', h: 360 },
+  { img: 'photos1/20250203_152946.jpg', l: 'Light & Shadow', h: 400 },
+  { img: 'photos1/20250310_164525.jpg', l: 'Nature Serenity', h: 380 },
+  { img: 'photos1/20250621_140649.jpg', l: 'Summer Rays', h: 440 },
+  { img: 'photos1/20250716_180729.jpg', l: 'Reflections', h: 350 },
+  { img: 'photos1/20250823_210534.jpg', l: 'Night Life', h: 410 },
+  { img: 'photos1/20250823_210929.jpg', l: 'Neon Trails', h: 380 },
+  { img: 'photos1/20251006_162148.jpg', l: 'Dusk Sky', h: 390 },
+  { img: 'photos1/20251015_185404.jpg', l: 'Contrast', h: 370 },
+  { img: 'photos1/20251018_203905.jpg', l: 'Evening Glow', h: 430 },
+  { img: 'photos1/20251217_173001.jpg', l: 'Winter Solitude', h: 400 },
+  { img: 'photos1/20260307_213810(1).jpg', l: 'Street Scenes', h: 360 },
+  { img: 'photos1/20260308_090333.jpg', l: 'Mist', h: 380 },
+  { img: 'photos1/20260322_193114.jpg', l: 'Deep Blue', h: 420 },
+  { img: 'photos1/IMG_1896.JPG', l: 'Captured Life', h: 390 },
+  { img: 'photos1/retouch_2025031521580637.jpg', l: 'Abstract Edit', h: 400 },
 ];
-const track = document.getElementById('photo-track');
-photos.forEach((p, i) => {
-  const item = document.createElement('div');
-  item.className = 'mitem';
 
-  if (p.img) {
-    item.innerHTML = `
-      <img src="${p.img}" alt="${p.l}" style="height:${p.h}px; object-fit: cover;">
-    `;
-  } else {
-    item.innerHTML = `<svg viewBox="0 0 300 ${p.h}" xmlns="http://www.w3.org/2000/svg" style="height:${p.h}px">
-      <defs><radialGradient id="pg${i}" cx="35%" cy="30%" r="75%">
-        <stop offset="0%" stop-color="${p.c[1]}" stop-opacity=".9"/>
-        <stop offset="100%" stop-color="${p.c[2]}"/>
-      </radialGradient></defs>
-      <rect width="300" height="${p.h}" fill="${p.c[2]}"/>
-      <rect width="300" height="${p.h}" fill="url(#pg${i})"/>
-      ${Array.from({ length: 4 }, (_, j) =>
-      '<circle cx="' + (40 + j * 65) + '" cy="' + (p.h * .3 + Math.sin(j + i) * p.h * .2) + '" r="' + (18 + j * 12) + '" fill="' + p.c[0] + '" opacity="' + (0.07 + j * 0.025) + '"/>').join('')}
-      <text x="150" y="${p.h - 15}" text-anchor="middle" font-family="Kalam, cursive" font-size="14" fill="rgba(255,255,255,0.35)">${p.l}</text>
-    </svg>`;
-  }
-  track.appendChild(item);
-});
-// Duplicate for seamless loop
-const clones = Array.from(track.children).map(el => el.cloneNode(true));
-clones.forEach(cl => track.appendChild(cl));
+function populateTrack(trackId, photoList) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  photoList.forEach((p, i) => {
+    const item = document.createElement('div');
+    item.className = 'mitem';
+    item.innerHTML = `<img src="${p.img}" alt="${p.l}" style="height:${p.h}px; width: 100%; object-fit: cover;">`;
+    track.appendChild(item);
+  });
+  // Duplicate for seamless loop
+  const clones = Array.from(track.children).map(el => el.cloneNode(true));
+  clones.forEach(cl => track.appendChild(cl));
+}
 
-let isDown = false, startX, scrollLeft;
-track.addEventListener('mousedown', e => {
-  isDown = true; track.classList.add('dragging');
-  startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft;
-});
-track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
-track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
-track.addEventListener('mousemove', e => {
-  if (!isDown) return; e.preventDefault();
-  const x = e.pageX - track.offsetLeft;
-  track.scrollLeft = scrollLeft - (x - startX) * 1.4;
-});
+// Split photos between two tracks
+const half = Math.ceil(allPhotos.length / 2);
+populateTrack('photo-track-1', allPhotos.slice(0, half));
+populateTrack('photo-track-2', allPhotos.slice(half));
+
+// Drag-to-scroll is disabled in favor of automatic marquee for dual rows
 
 
 /* ═══════════════════════════════════════════════════
