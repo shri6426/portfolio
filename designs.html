@@ -67,12 +67,22 @@
       font-size: .95rem;
       color: rgba(255,255,255,.6);
       text-decoration: none;
-      transition: all .25s ease;
+      transition: all .4s cubic-bezier(.23, 1, .32, 1);
+    }
+    .back-link.nav-hidden {
+      transform: translateY(-100px);
     }
     .back-link:hover {
       background: rgba(255,255,255,.12);
       color: #fff;
       border-color: rgba(255,255,255,.25);
+    }
+
+    /* Handle mobile hidden state */
+    @media (max-width: 768px) {
+      .back-link.nav-hidden {
+        transform: translate(-50%, 100px);
+      }
     }
 
     /* ═══ FILTER TABS ═══ */
@@ -374,6 +384,21 @@
       const card = e.target.closest('.design-card');
       if (card) card.style.transform = '';
     }, true);
+
+    // Scroll hide/show for back-link
+    let lastScrollY = window.scrollY;
+    const backLink = document.querySelector('.back-link');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (backLink) {
+        if (scrollY > lastScrollY && scrollY > 100) {
+          backLink.classList.add('nav-hidden');
+        } else {
+          backLink.classList.remove('nav-hidden');
+        }
+      }
+      lastScrollY = scrollY;
+    });
   </script>
 </body>
 </html>

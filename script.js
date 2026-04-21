@@ -783,6 +783,13 @@ document.querySelectorAll('.wcard').forEach(card => {
    ═══════════════════════════════════════════════════ */
 const projs = [
   {
+    ico: '<svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#e040fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V13a2 2 0 0 1 2-2h4l2-3h4l2 3h4a2 2 0 0 1 2 2z" /><circle cx="16" cy="16" r="4" /></svg>',
+    t: 'NoirBooth — Retro Photobooth',
+    d: 'A cinematic web-based photobooth featuring retro filters, grainy textures, and a timeless noir aesthetic. Capture and download moments with a single click.',
+    tags: ['React', 'WebGL', 'Canvas'],
+    link: 'https://noir-booth.vercel.app/'
+  },
+  {
     ico: '<svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#ff6a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="5"/><path d="M11 10 L7 26 L16 22 L25 26 L21 10"/><line x1="13" y1="17" x2="19" y2="17"/></svg>',
     t: 'Smoke Detector',
     d: 'IoT-based smart smoke detection system with real-time sensor alerts, live dashboards, and emergency notifications to your phone.',
@@ -824,7 +831,13 @@ projs.forEach((p, idx) => {
   const c = document.createElement('div');
   c.className = 'pcard reveal';
   c.style.transitionDelay = `${idx * 0.08}s`;
-  c.innerHTML = `<div class="pico">${p.ico}</div><div class="ptitle">${p.t}</div><div class="pdesc">${p.d}</div><div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>`;
+  c.innerHTML = `
+    <div class="pico">${p.ico}</div>
+    <div class="ptitle">${p.t}</div>
+    <div class="pdesc">${p.d}</div>
+    <div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>
+    ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" class="plnk" style="z-index: 10; position: relative;">View Project →</a>` : ''}
+  `;
   c.addEventListener('mousemove', e => {
     const r = c.getBoundingClientRect();
     c.style.transform = `translateY(-5px) rotateX(${((e.clientY - r.top) / r.height - .5) * -8}deg) rotateY(${((e.clientX - r.left) / r.width - .5) * 8}deg)`;
@@ -938,8 +951,20 @@ counters.forEach(c => counterObserver.observe(c));
 /* ═══════════════════════════════════════════════════
    PARALLAX on scroll
    ═══════════════════════════════════════════════════ */
+let lastScrollY = window.scrollY;
+const navEl = document.querySelector('nav');
+
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
+
+  // Nav hide/show on scroll
+  if (navEl) {
+    if (scrollY > lastScrollY && scrollY > 100) {
+      navEl.classList.add('nav-hidden');
+    } else {
+      navEl.classList.remove('nav-hidden');
+    }
+  }
 
   // Hero parallax
   const heroInner = document.querySelector('.hero-inner');
@@ -952,6 +977,8 @@ window.addEventListener('scroll', () => {
   document.querySelectorAll('.blob').forEach((blob, i) => {
     blob.style.transform = `translateY(${scrollY * 0.05 * (i % 2 === 0 ? 1 : -1)}px)`;
   });
+
+  lastScrollY = scrollY;
 });
 
 
