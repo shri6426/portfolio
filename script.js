@@ -1,35 +1,5 @@
-/* ═══════════════════════════════════════════════════
-   CURSOR — smooth custom cursor
-   ═══════════════════════════════════════════════════ */
-const dot = document.getElementById('dot');
-const ring = document.getElementById('ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.transform = `translate(${mx}px,${my}px)`;
-});
-(function loop() {
-  rx += (mx - rx) * 0.13;
-  ry += (my - ry) * 0.13;
-  ring.style.transform = `translate(${rx}px,${ry}px)`;
-  requestAnimationFrame(loop);
-})();
+/* cursor JS removed — using CSS custom cursor files */
 
-/* Cursor grow on hover over interactive elements */
-document.querySelectorAll('a, .btn, .wcard, .pcard, .scard, .chip, .atag, .stickman-canvas').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    ring.style.width = '56px';
-    ring.style.height = '56px';
-    ring.style.margin = '-28px 0 0 -28px';
-    ring.style.borderColor = 'rgba(224,64,251,.6)';
-  });
-  el.addEventListener('mouseleave', () => {
-    ring.style.width = '36px';
-    ring.style.height = '36px';
-    ring.style.margin = '-18px 0 0 -18px';
-    ring.style.borderColor = 'rgba(255,255,255,.4)';
-  });
-});
 
 /* ═══════════════════════════════════════════════════
    SPARKLES — floating dots in hero
@@ -43,41 +13,8 @@ for (let i = 0; i < 50; i++) {
   sc.appendChild(s);
 }
 
-/* ═══════════════════════════════════════════════════
-   AURORA — animated background blobs
-   ═══════════════════════════════════════════════════ */
-const cv = document.getElementById('cv');
-const ctx = cv.getContext('2d');
-let W, H;
-function resize() { W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
-resize(); window.addEventListener('resize', resize);
-const B = [
-  { x: .25, y: .4, r: 380, c: [255, 100, 20], sx: -.34, sy: -.14, sp: .025 },
-  { x: .75, y: .35, r: 430, c: [200, 40, 245], sx: .28, sy: -.22, sp: .018 },
-  { x: .5, y: .65, r: 340, c: [20, 140, 255], sx: .1, sy: .24, sp: .022 },
-  { x: .18, y: .7, r: 280, c: [240, 200, 0], sx: -.22, sy: .2, sp: .03 },
-  { x: .85, y: .7, r: 300, c: [60, 230, 170], sx: .26, sy: .28, sp: .02 },
-];
-B.forEach(b => { b.cx = b.x * window.innerWidth; b.cy = b.y * window.innerHeight; });
-let ax = W / 2, ay = H / 2;
-window.addEventListener('mousemove', e => { ax = e.clientX; ay = e.clientY; });
-(function frame(t = 0) {
-  ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = '#060608'; ctx.fillRect(0, 0, W, H);
-  B.forEach(b => {
-    const tx = W * .5 + ax * .16 * b.sx + Math.sin(t * .0004 + b.sx * 9) * 55;
-    const ty = H * .5 + ay * .16 * b.sy + Math.cos(t * .0003 + b.sy * 9) * 48;
-    b.cx += (tx - b.cx) * b.sp;
-    b.cy += (ty - b.cy) * b.sp;
-    const g = ctx.createRadialGradient(b.cx, b.cy, 0, b.cx, b.cy, b.r);
-    const [r, gr, bl] = b.c;
-    g.addColorStop(0, `rgba(${r},${gr},${bl},.26)`);
-    g.addColorStop(.45, `rgba(${r},${gr},${bl},.1)`);
-    g.addColorStop(1, `rgba(${r},${gr},${bl},0)`);
-    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2); ctx.fill();
-  });
-  requestAnimationFrame(frame);
-})();
+
+
 
 /* ═══════════════════════════════════════════════════
    INTERACTIVE STICKMAN PLAYGROUND
@@ -1043,68 +980,8 @@ function typeEffect() {
 typeEffect();
 
 
-/* ═══════════════════════════════════════════════════
-   INTERACTIVE PARTICLE TRAIL (follows cursor globally)
-   ═══════════════════════════════════════════════════ */
-const trailCanvas = document.getElementById('trail-canvas');
-if (trailCanvas) {
-  const tctx = trailCanvas.getContext('2d');
-  let tW, tH;
-  function resizeTrail() {
-    tW = trailCanvas.width = window.innerWidth;
-    tH = trailCanvas.height = window.innerHeight;
-  }
-  resizeTrail();
-  window.addEventListener('resize', resizeTrail);
+/* particle trail removed */
 
-  const trailParticles = [];
-  let lastTrailX = 0, lastTrailY = 0;
-
-  document.addEventListener('mousemove', e => {
-    const dx = e.clientX - lastTrailX;
-    const dy = e.clientY - lastTrailY;
-    const speed = Math.hypot(dx, dy);
-    lastTrailX = e.clientX;
-    lastTrailY = e.clientY;
-
-    if (speed > 3) {
-      const count = Math.min(3, Math.floor(speed / 10));
-      for (let i = 0; i < count; i++) {
-        trailParticles.push({
-          x: e.clientX + (Math.random() - 0.5) * 8,
-          y: e.clientY + (Math.random() - 0.5) * 8,
-          vx: (Math.random() - 0.5) * 2,
-          vy: (Math.random() - 0.5) * 2 - 1,
-          life: 1,
-          size: 1.5 + Math.random() * 3,
-          color: ['#e040fb', '#00e5ff', '#ffda00', '#b2ff59'][Math.floor(Math.random() * 4)],
-        });
-      }
-    }
-  });
-
-  function animateTrail() {
-    tctx.clearRect(0, 0, tW, tH);
-    for (let i = trailParticles.length - 1; i >= 0; i--) {
-      const p = trailParticles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += 0.03;
-      p.life -= 0.02;
-      if (p.life <= 0) { trailParticles.splice(i, 1); continue; }
-
-      tctx.save();
-      tctx.globalAlpha = p.life * 0.6;
-      tctx.fillStyle = p.color;
-      tctx.beginPath();
-      tctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-      tctx.fill();
-      tctx.restore();
-    }
-    requestAnimationFrame(animateTrail);
-  }
-  animateTrail();
-}
 
 
 /* ═══════════════════════════════════════════════════

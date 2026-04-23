@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shri — Client Portfolios</title>
+  <meta name="description" content="Portfolio websites Shri has designed and built for clients — clean, modern, and crafted from scratch.">
+  <link rel="icon" type="image/png" href="favicon1.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══ PAGE HERO ═══ */
+    .port-hero {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: #080808;
+    }
+    .port-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(204,26,26,.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139,0,0,.04) 0%, transparent 50%);
+    }
+    .port-hero-inner {
+      position: relative;
+      z-index: 10;
+      padding: 6rem 2rem 4rem;
+      animation: fadeSlideUp .8s ease .3s both;
+    }
+    .port-hero-inner h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      color: #fff;
+    }
+    .port-hero-inner p {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      color: rgba(232,224,224,.4);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* ═══ BACK LINK ═══ */
+    .back-link {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 200;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .45rem 1.1rem;
+      border-radius: 2px;
+      background: rgba(204,26,26,.08);
+      border: 1px solid rgba(204,26,26,.2);
+      backdrop-filter: blur(20px);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(232,224,224,.5);
+      text-decoration: none;
+      transition: all .3s ease;
+    }
+    .back-link:hover {
+      background: rgba(204,26,26,.18);
+      color: #fff;
+      border-color: rgba(204,26,26,.5);
+      box-shadow: 0 0 16px rgba(204,26,26,.2);
+    }
+    @media (max-width: 768px) {
+      .back-link {
+        top: auto;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 10px 30px rgba(0,0,0,.4);
+      }
+      .back-link.nav-hidden { transform: translate(-50%, 100px); }
+    }
+
+    /* ═══ PORTFOLIO GRID ═══ */
+    .portfolio-grid-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 3rem 2rem 8rem;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    /* ═══ PORTFOLIO CARD ═══ */
+    .port-card {
+      background: #0f0a0a;
+      border: 1px solid rgba(204,26,26,.1);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all .4s cubic-bezier(.23,1,.32,1);
+      position: relative;
+      text-decoration: none;
+    }
+    .port-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(204,26,26,.4);
+      box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 30px rgba(204,26,26,.08);
+    }
+    .port-card-vis {
+      height: 260px;
+      position: relative;
+      overflow: hidden;
+      background: #0a0a14;
+    }
+    .port-card-vis img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform .6s cubic-bezier(.23,1,.32,1);
+    }
+    .port-card:hover .port-card-vis img {
+      transform: scale(1.05);
+    }
+    .port-card-vis::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(transparent, rgba(15,10,10,1));
+      z-index: 3;
+      pointer-events: none;
+    }
+    .port-card-content {
+      padding: 1.8rem;
+      flex: 1;
+    }
+    .port-card-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+      color: #cc1a1a;
+    }
+    .port-card-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .8rem;
+      letter-spacing: .02em;
+    }
+    .port-card-desc {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .95rem;
+      color: rgba(232,224,224,.5);
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+    .atag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: .8rem;
+      color: #cc1a1a;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      transition: all .3s ease;
+      font-weight: 600;
+    }
+    .atag:hover {
+      color: #ff2020;
+      gap: .7rem;
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 900px) {
+      .portfolio-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .portfolio-grid-wrap { padding: 2rem 1rem 6rem; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="index.html" class="back-link">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+
+  <!-- HERO -->
+  <section class="port-hero">
+    <div class="port-hero-inner">
+      <p class="sec-label" style="margin-bottom:.8rem">// client work</p>
+      <h1>Websites I've <span style="color:#cc1a1a">Built</span></h1>
+      <p>Clean, modern, and high-performance websites custom-designed and developed from the ground up.</p>
+    </div>
+  </section>
+
+  <!-- GRID -->
+  <div class="portfolio-grid-wrap">
+    <div class="portfolio-grid">
+
+      <!-- Project 01 -->
+      <a href="https://vignesh-ramakrishnan-portfolio123.vercel.app/" target="_blank" rel="noopener" class="port-card" style="--hover-glow:rgba(0,229,255,.12); border-color:rgba(0,229,255,.12)">
+        <div class="port-card-vis">
+          <img src="preview-vignesh.png" alt="Project 01 preview" loading="lazy">
+        </div>
+        <div class="port-card-body">
+          <div class="port-card-tag" style="color:#00e5ff">✦ Web Design &amp; Dev</div>
+          <div class="port-card-title">Project 01 — Technical Manager</div>
+          <div class="port-card-desc">A sleek, professional portfolio featuring an experience timeline, skills showcase, awards section, and smooth contact flow. Designed and built from scratch.</div>
+          <div class="port-card-link">View Project <span>→</span></div>
+        </div>
+      </a>
+
+      <!-- Project 02 -->
+      <a href="https://lubna-shireen-porfolio.vercel.app/" target="_blank" rel="noopener" class="port-card" style="--hover-glow:rgba(224,64,251,.12); border-color:rgba(224,64,251,.12)">
+        <div class="port-card-vis">
+          <img src="preview-lubna.png" alt="Project 02 preview" loading="lazy">
+        </div>
+        <div class="port-card-body">
+          <div class="port-card-tag" style="color:#e040fb">✦ Web Design &amp; Dev</div>
+          <div class="port-card-title">Project 02 — Minimalist Professional</div>
+          <div class="port-card-desc">A sophisticated, minimal portfolio website featuring clean layouts, smooth transitions, and an elegant dark aesthetic. Focus on clarity and visual storytelling.</div>
+          <div class="port-card-link">View Project <span>→</span></div>
+        </div>
+      </a>
+
+      <!-- Project 03 -->
+      <a href="https://shyam-portfolio-coral.vercel.app/" target="_blank" rel="noopener" class="port-card" style="--hover-glow:rgba(178,255,89,.12); border-color:rgba(178,255,89,.1)">
+        <div class="port-card-vis">
+          <img src="preview-shyam.png" alt="Project 03 preview" loading="lazy">
+        </div>
+        <div class="port-card-body">
+          <div class="port-card-tag" style="color:#b2ff59">✦ Web Design &amp; Dev</div>
+          <div class="port-card-title">Project 03 — Graphic Designer</div>
+          <div class="port-card-desc">A clean, modern portfolio built for a graphic designer. Features curated work galleries, smooth animations, and a bold visual identity.</div>
+          <div class="port-card-link">View Project <span>→</span></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 Shri</span>
+    <span>Powered by <strong style="color:#cc1a1a">Mech Strek</strong>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cc1a1a" stroke-width="2" style="vertical-align:middle;margin-left:.2rem"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    </span>
+  </footer>
+
+  <script>
+    // Scroll hide/show for back-link
+    let lastScrollY = window.scrollY;
+    const backLink = document.querySelector('.back-link');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (backLink) {
+        if (scrollY > lastScrollY && scrollY > 100) {
+          backLink.classList.add('nav-hidden');
+        } else {
+          backLink.classList.remove('nav-hidden');
+        }
+      }
+      lastScrollY = scrollY;
+    });
+
+    // Reveal handled by CSS animation for robustness
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            obs.unobserve(e.target);
+          }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+
+    // Card hover glow border
+    document.querySelectorAll('.port-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const glow = getComputedStyle(card).getPropertyValue('--hover-glow').trim();
+        if (glow) card.style.boxShadow = `0 24px 60px rgba(0,0,0,.5), 0 0 40px ${glow}`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.boxShadow = '';
+      });
+    });
+  </script>
+</body>
+
+</html>
