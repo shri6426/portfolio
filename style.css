@@ -17,10 +17,10 @@ body{
 
 /* ─── CUSTOM CURSORS ─── */
 * {
-  cursor: url('cursor/download__3_-removebg-preview.png'), auto;
+  cursor: url('cursor/cursor32.png') 16 16, auto;
 }
 a, button, .btn, .wcard, .pcard, .scard, .chip, .atag, .port-card, .pg-btn, .filter-tab, .design-card, .mitem {
-  cursor: url('cursor/download__3_-removebg-preview.png'), pointer;
+  cursor: url('cursor/cursor32.png') 16 16, pointer;
 }
 :root{
   --red:#cc1a1a;
