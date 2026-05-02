@@ -720,6 +720,13 @@ document.querySelectorAll('.wcard').forEach(card => {
    ═══════════════════════════════════════════════════ */
 const projs = [
   {
+    ico: '<svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#b2ff59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="24" height="20" rx="2"/><path d="M8 12h4m-4 4h8m-8 4h4m4-8h4m-4 4h4m-4 4h4"/></svg>',
+    t: 'ASCII Photobooth',
+    d: 'A retro-themed single-page application that turns your webcam feed or uploaded images into green monochrome ASCII art.',
+    tags: ['Web', 'Canvas', 'Retro'],
+    link: 'https://ascii-booth-xi.vercel.app/'
+  },
+  {
     ico: '<svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#e040fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V13a2 2 0 0 1 2-2h4l2-3h4l2 3h4a2 2 0 0 1 2 2z" /><circle cx="16" cy="16" r="4" /></svg>',
     t: 'NoirBooth — Retro Photobooth',
     d: 'A cinematic web-based photobooth featuring retro filters, grainy textures, and a timeless noir aesthetic. Capture and download moments with a single click.',
