@@ -720,6 +720,13 @@ document.querySelectorAll('.wcard').forEach(card => {
    ═══════════════════════════════════════════════════ */
 const projs = [
   {
+    ico: '<svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4L28 26H4L16 4Z"/><path d="M16 12L20 20H12L16 12Z" opacity="0.4"/></svg>',
+    t: 'TRIANGLE — AI Web Architect',
+    d: 'An AI-powered creative reverse engineering platform that deconstructs designs into functional code with intelligent asset analysis.',
+    tags: ['AI', 'Next.js', 'Vercel'],
+    link: 'https://triangle-sooty.vercel.app/'
+  },
+  {
     ico: '<svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#b2ff59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="24" height="20" rx="2"/><path d="M8 12h4m-4 4h8m-8 4h4m4-8h4m-4 4h4m-4 4h4"/></svg>',
     t: 'ASCII Photobooth',
     d: 'A retro-themed single-page application that turns your webcam feed or uploaded images into green monochrome ASCII art.',
