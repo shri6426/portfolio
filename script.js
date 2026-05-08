@@ -721,9 +721,9 @@ document.querySelectorAll('.wcard').forEach(card => {
 const projs = [
   {
     ico: '<svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4L28 26H4L16 4Z"/><path d="M16 12L20 20H12L16 12Z" opacity="0.4"/></svg>',
-    t: 'TRIANGLE — AI Web Architect',
-    d: 'An AI-powered creative reverse engineering platform that deconstructs designs into functional code with intelligent asset analysis.',
-    tags: ['AI', 'Next.js', 'Vercel'],
+    t: 'TRIANGLE — AI Creative Intelligence',
+    d: 'Premium AI platform transforming images and videos into cinematic production-grade prompts using Gemini Vision AI for Midjourney, Sora, and Flux.',
+    tags: ['AI', 'Vision AI', 'SaaS'],
     link: 'https://triangle-sooty.vercel.app/'
   },
   {
