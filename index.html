@@ -409,7 +409,7 @@
           </svg>
         </h2>
       </div>
-      <div class="proj-grid" id="pgrid"></div>
+      <div id="sg-container" class="sg-container"></div>
     </div>
   </section>
 
@@ -437,9 +437,11 @@
       </div>
     </div>
 
-    <div class="photo-scroll-wrap reveal" style="margin-top: 0;">
-      <div class="photo-track" id="photo-track-1"></div>
-      <div class="photo-track track-reverse" id="photo-track-2" style="margin-top: 1.5rem;"></div>
+    <div id="image-trail-area" class="reveal" style="position: relative; width: 100%; height: 60vh; min-height: 450px; overflow: hidden; cursor: crosshair; display: flex; align-items: center; justify-content: center; border-top: 1px dashed rgba(178,255,89,0.15); border-bottom: 1px dashed rgba(178,255,89,0.15); background: rgba(178,255,89,0.02); margin-top: 1rem;">
+       <div style="font-family: 'Share Tech Mono', monospace; font-size: 1.1rem; color: rgba(178,255,89,0.4); text-transform: uppercase; pointer-events: none; letter-spacing: 0.2em; text-align: center; line-height: 1.6;">
+         Move cursor to explore<br>
+         <span style="font-size: 0.8rem; opacity: 0.6; color: #fff;">Interactive Photo Trail</span>
+       </div>
     </div>
   </section>
 
@@ -564,6 +566,8 @@
     </span>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
 </body>
 

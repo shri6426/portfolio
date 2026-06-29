@@ -777,95 +777,252 @@ const projs = [
     tags: ['D3.js', 'GSAP', 'Canvas']
   },
 ];
-const pg = document.getElementById('pgrid');
-projs.forEach((p, idx) => {
-  const c = document.createElement('div');
-  c.className = 'pcard reveal';
-  c.style.transitionDelay = `${idx * 0.08}s`;
-  c.innerHTML = `
-    <div class="pico">${p.ico}</div>
-    <div class="ptitle">${p.t}</div>
-    <div class="pdesc">${p.d}</div>
-    <div class="ptags">${p.tags.map(t => `<span class="ptag">${t}</span>`).join('')}</div>
-    ${p.link ? `<a href="${p.link}" target="_blank" rel="noopener" class="plnk" style="z-index: 10; position: relative;">View Project →</a>` : ''}
-  `;
-  c.addEventListener('mousemove', e => {
-    const r = c.getBoundingClientRect();
-    c.style.transform = `translateY(-5px) rotateX(${((e.clientY - r.top) / r.height - .5) * -8}deg) rotateY(${((e.clientX - r.left) / r.width - .5) * 8}deg)`;
-    // Glow effect
-    const x = ((e.clientX - r.left) / r.width) * 100;
-    const y = ((e.clientY - r.top) / r.height) * 100;
-    c.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(0,229,255,0.08) 0%, rgba(255,255,255,0.02) 60%)`;
+const sgContainer = document.getElementById('sg-container');
+if (sgContainer) {
+  // Split projects: top 3 for Bento, remaining 6 for grid
+  const bentoItems = projs.slice(0, 3);
+  const gridItems = projs.slice(3, 9);
+  
+  function createGridItem(item) {
+    if (!item) return '<div class="sg-item" style="pointer-events:none; opacity:0;"></div>';
+    return `
+      <div class="sg-item" onclick="window.open('${item.link || '#'}', '_blank')">
+        <div class="sg-item-inner">
+          <div class="sg-item-icon" style="color:var(--cyan)">${item.ico}</div>
+          <div class="sg-item-content">
+            <div class="sg-item-subtitle">Built with ${item.tags.join(', ')}</div>
+            <div class="sg-item-title">${item.t.split('—')[0].trim()}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  let html = '';
+  // Create 3 grid items for Row 1
+  for (let i = 0; i < 3; i++) {
+    html += createGridItem(gridItems[i]);
+  }
+  
+  // Create Bento Container for Row 2
+  html += `<div class="bento-container">`;
+  bentoItems.forEach((bItem, idx) => {
+    const isActive = idx === 0 ? 'active' : '';
+    html += `
+      <div class="bento-item ${isActive}" data-index="${idx}">
+        <div class="bento-border"></div>
+        <div class="bento-bg"></div>
+        <div class="bento-active-content">
+          <div class="bento-footer">
+            <div style="flex:1;">
+              <div class="bento-title">${bItem.t}</div>
+              <div class="bento-desc">${bItem.d}</div>
+            </div>
+            ${bItem.link ? `<a href="${bItem.link}" class="warr" style="text-decoration:none; font-size:1.4rem; padding-left:1rem;" target="_blank">→</a>` : ''}
+          </div>
+        </div>
+        <div class="bento-inactive-content">
+          <div style="color:var(--red-bright); opacity:0.8;">${bItem.ico}</div>
+          <div class="bento-inactive-title">${bItem.t.split('—')[0].trim()}</div>
+        </div>
+      </div>
+    `;
   });
-  c.addEventListener('mouseleave', () => {
-    c.style.transform = '';
-    c.style.background = '';
+  html += `</div>`;
+  
+  // Create 3 grid items for Row 3
+  for (let i = 3; i < 6; i++) {
+    html += createGridItem(gridItems[i]);
+  }
+  
+  sgContainer.innerHTML = html;
+  
+  // Bento Hover Logic
+  const bentoEls = sgContainer.querySelectorAll('.bento-item');
+  bentoEls.forEach(el => {
+    el.addEventListener('pointerenter', () => {
+      bentoEls.forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+    });
   });
-  pg.appendChild(c);
-  revealObserver.observe(c);
-});
+  
+  // GSAP Animations
+  window.addEventListener('load', () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      const gridNodes = Array.from(sgContainer.children);
+      
+      gsap.from(gridNodes, {
+        scrollTrigger: {
+          trigger: sgContainer,
+          start: 'top 85%',
+          end: 'center center',
+          scrub: 1.5,
+        },
+        y: 150,
+        opacity: 0,
+        stagger: {
+          amount: 0.6,
+          from: "center"
+        },
+        ease: 'sine.out',
+      });
+      
+      const bentoGroup = sgContainer.querySelector('.bento-container');
+      if (bentoGroup) {
+        gsap.to(bentoGroup, {
+          scrollTrigger: {
+            trigger: sgContainer,
+            start: 'top center',
+            end: 'bottom center',
+            scrub: 1,
+          },
+          y: 30,
+          scale: 1.02,
+          ease: 'power2.out'
+        });
+      }
+    }
+  });
+}
 
 
 /* ═══════════════════════════════════════════════════
-   PHOTOS - horizontal drag-to-scroll gallery
+   PHOTOS - IMAGE TRAIL EFFECT
    ═══════════════════════════════════════════════════ */
 const allPhotos = [
-  { img: 'photos1/20241222_173241.jpg', l: 'Golden Hour', h: 380 },
-  { img: 'photos1/20241230_102527.jpg', l: 'Urban Escape', h: 420 },
-  { img: 'photos1/20250131_103643(0).jpg', l: 'Minimal View', h: 360 },
-  { img: 'photos1/20250203_152946.jpg', l: 'Light & Shadow', h: 400 },
-  { img: 'photos1/20250310_164525.jpg', l: 'Nature Serenity', h: 380 },
-  { img: 'photos1/20250621_140649.jpg', l: 'Summer Rays', h: 440 },
-  { img: 'photos1/20250716_180729.jpg', l: 'Reflections', h: 350 },
-  { img: 'photos1/20250823_210534.jpg', l: 'Night Life', h: 410 },
-  { img: 'photos1/20250823_210929.jpg', l: 'Neon Trails', h: 380 },
-  { img: 'photos1/20251006_162148.jpg', l: 'Dusk Sky', h: 390 },
-  { img: 'photos1/20251015_185404.jpg', l: 'Contrast', h: 370 },
-  { img: 'photos1/20251018_203905.jpg', l: 'Evening Glow', h: 430 },
-  { img: 'photos1/20251217_173001.jpg', l: 'Winter Solitude', h: 400 },
-  { img: 'photos1/20260307_213810(1).jpg', l: 'Street Scenes', h: 360 },
-  { img: 'photos1/20260308_090333.jpg', l: 'Mist', h: 380 },
-  { img: 'photos1/20260322_193114.jpg', l: 'Deep Blue', h: 420 },
-  { img: 'photos1/IMG_1896.JPG', l: 'Captured Life', h: 390 },
-  { img: 'photos1/retouch_2025031521580637.jpg', l: 'Abstract Edit', h: 400 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.13 PM (1).jpeg', l: 'Visual Pulse', h: 380 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.13 PM.jpeg', l: 'Urban Texture', h: 420 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.14 PM.jpeg', l: 'Daily Rhythm', h: 360 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (1).jpeg', l: 'Storytelling', h: 400 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (2).jpeg', l: 'Aesthetic Focus', h: 380 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (3).jpeg', l: 'Lens Flare', h: 440 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM.jpeg', l: 'Monochrome', h: 350 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.16 PM (1).jpeg', l: 'City Lights', h: 410 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.16 PM.jpeg', l: 'Pixel Perfect', h: 380 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM (1).jpeg', l: 'Shadow Play', h: 390 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM (2).jpeg', l: 'Fine Grain', h: 370 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM.jpeg', l: 'Discovery', h: 430 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM (1).jpeg', l: 'Candid Motion', h: 400 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM (2).jpeg', l: 'Neon Glow', h: 360 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM.jpeg', l: 'Drift', h: 380 },
-  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.19 PM.jpeg', l: 'Quiet Echo', h: 420 },
+  { img: 'photos1/20241222_173241.jpg', l: 'Golden Hour' },
+  { img: 'photos1/20241230_102527.jpg', l: 'Urban Escape' },
+  { img: 'photos1/20250131_103643(0).jpg', l: 'Minimal View' },
+  { img: 'photos1/20250203_152946.jpg', l: 'Light & Shadow' },
+  { img: 'photos1/20250310_164525.jpg', l: 'Nature Serenity' },
+  { img: 'photos1/20250621_140649.jpg', l: 'Summer Rays' },
+  { img: 'photos1/20250716_180729.jpg', l: 'Reflections' },
+  { img: 'photos1/20250823_210534.jpg', l: 'Night Life' },
+  { img: 'photos1/20250823_210929.jpg', l: 'Neon Trails' },
+  { img: 'photos1/20251006_162148.jpg', l: 'Dusk Sky' },
+  { img: 'photos1/20251015_185404.jpg', l: 'Contrast' },
+  { img: 'photos1/20251018_203905.jpg', l: 'Evening Glow' },
+  { img: 'photos1/20251217_173001.jpg', l: 'Winter Solitude' },
+  { img: 'photos1/20260307_213810(1).jpg', l: 'Street Scenes' },
+  { img: 'photos1/20260308_090333.jpg', l: 'Mist' },
+  { img: 'photos1/20260322_193114.jpg', l: 'Deep Blue' },
+  { img: 'photos1/IMG_1896.JPG', l: 'Captured Life' },
+  { img: 'photos1/retouch_2025031521580637.jpg', l: 'Abstract Edit' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.13 PM (1).jpeg', l: 'Visual Pulse' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.13 PM.jpeg', l: 'Urban Texture' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.14 PM.jpeg', l: 'Daily Rhythm' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (1).jpeg', l: 'Storytelling' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (2).jpeg', l: 'Aesthetic Focus' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM (3).jpeg', l: 'Lens Flare' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.15 PM.jpeg', l: 'Monochrome' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.16 PM (1).jpeg', l: 'City Lights' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.16 PM.jpeg', l: 'Pixel Perfect' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM (1).jpeg', l: 'Shadow Play' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM (2).jpeg', l: 'Fine Grain' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.17 PM.jpeg', l: 'Discovery' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM (1).jpeg', l: 'Candid Motion' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM (2).jpeg', l: 'Neon Glow' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.18 PM.jpeg', l: 'Drift' },
+  { img: 'photos1/WhatsApp Image 2026-04-20 at 8.57.19 PM.jpeg', l: 'Quiet Echo' },
 ];
 
-function populateTrack(trackId, photoList) {
-  const track = document.getElementById(trackId);
-  if (!track) return;
-  photoList.forEach((p, i) => {
+const trailArea = document.getElementById('image-trail-area');
+if (trailArea) {
+  let lastTime = 0;
+  let lastPos = null;
+  let imageIndex = 0;
+  
+  const threshold = 80;
+  const minDelay = 50;
+  const duration = 3000;
+  const maxItems = 25;
+  const rotationRange = 30;
+  
+  let activeItems = [];
+  
+  const clearObserver = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) {
+      activeItems.forEach(item => removeItem(item, item._rotation || 0));
+      activeItems = [];
+      lastPos = null;
+    }
+  }, { threshold: 0 });
+  clearObserver.observe(trailArea);
+
+  trailArea.addEventListener('pointermove', e => {
+    const rect = trailArea.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const now = performance.now();
+    
+    if (lastPos) {
+      const dist = Math.hypot(x - lastPos.x, y - lastPos.y);
+      if (dist < threshold || now - lastTime < minDelay) {
+        return;
+      }
+    }
+    
+    lastPos = { x, y };
+    lastTime = now;
+    
+    const imgData = allPhotos[imageIndex % allPhotos.length];
+    imageIndex++;
+    
+    const rotation = Math.random() * rotationRange - (rotationRange / 2);
+    
     const item = document.createElement('div');
-    item.className = 'mitem';
-    item.innerHTML = `<img src="${p.img}" alt="${p.l}" style="height:${p.h}px; width: 100%; object-fit: cover;">`;
-    track.appendChild(item);
+    item.className = 'trail-image';
+    item.style.left = x + 'px';
+    item.style.top = y + 'px';
+    item._rotation = rotation;
+    
+    item.style.transform = `translate(-50%, -50%) scale(0.8) rotate(${rotation}deg)`;
+    
+    const img = document.createElement('img');
+    img.src = imgData.img;
+    img.alt = imgData.l;
+    img.draggable = false;
+    item.appendChild(img);
+    
+    trailArea.appendChild(item);
+    
+    requestAnimationFrame(() => {
+      item.style.opacity = '1';
+      item.style.transform = `translate(-50%, -50%) scale(1) rotate(${rotation}deg)`;
+    });
+    
+    activeItems.push(item);
+    
+    if (activeItems.length > maxItems) {
+      const oldItem = activeItems.shift();
+      removeItem(oldItem, oldItem._rotation);
+    }
+    
+    setTimeout(() => {
+      const idx = activeItems.indexOf(item);
+      if (idx > -1) {
+        activeItems.splice(idx, 1);
+        removeItem(item, rotation);
+      }
+    }, duration);
   });
-  // Duplicate for seamless loop
-  const clones = Array.from(track.children).map(el => el.cloneNode(true));
-  clones.forEach(cl => track.appendChild(cl));
+  
+  trailArea.addEventListener('pointerleave', () => {
+    lastPos = null;
+  });
+  
+  function removeItem(element, rotation) {
+    element.style.opacity = '0';
+    element.style.transform = `translate(-50%, -50%) scale(0.5) rotate(${rotation * 0.75}deg)`;
+    setTimeout(() => {
+      if (element.parentNode) {
+        element.parentNode.removeChild(element);
+      }
+    }, 400);
+  }
 }
-
-// Split photos between two tracks
-const half = Math.ceil(allPhotos.length / 2);
-populateTrack('photo-track-1', allPhotos.slice(0, half));
-populateTrack('photo-track-2', allPhotos.slice(half));
-
-// Drag-to-scroll is disabled in favor of automatic marquee for dual rows
 
 
 /* ═══════════════════════════════════════════════════
